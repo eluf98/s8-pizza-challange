@@ -1,15 +1,17 @@
 
 body {
     font-family: 'Roboto Condensed', sans-serif; /* Fontu Roboto Condensed */
-    background-color: #FAF7F2; 
-    color: #292929;
+    background-color: #FAF7F2; /* Bej arka plan */
+    color: #292929; /* Koyu gri yazı rengi */
+    margin: 0;
     padding: 0;
   }
   
   h1, h2, p, label {
-    font-family: 'Barlow', sans-serif; 
+    font-family: 'Barlow', sans-serif; /* Başlıklar ve etiketler için Barlow fontu */
   }
   
+  /* Form Konteyneri */
   .form-container {
     max-width: 600px;
     margin: 50px auto;
@@ -20,38 +22,42 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
+  /* Başlık */
   .form-title {
     font-size: 28px;
     font-weight: bold;
-    color: #CE2829;
+    color: #CE2829; /* Kırmızı renk */
     margin-bottom: 20px;
     text-align: center;
   }
   
-  
+  /* Alt Başlık */
   .form-subtitle {
     font-size: 22px;
-    color: black;
+    color: black; /* Açık gri */
     margin-bottom: 10px;
   }
   
+  /* Fiyat */
   .form-price {
     font-size: 18px;
     color: black;
     margin-bottom: 20px;
   }
   
+  /* Form Grupları */
   .form-group {
     margin-bottom: 20px;
   }
   
+  /* Etiketler */
   .form-label {
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
   }
   
-
+  /* İsim Giriş */
   .form-input {
     width: 100%;
     padding: 10px;
@@ -60,6 +66,7 @@ body {
     font-size: 16px;
   }
   
+  /* Radyo Seçenekleri */
   .form-options {
     display: flex;
     gap: 15px;
@@ -75,6 +82,7 @@ body {
     margin-right: 5px;
   }
   
+  /* Seçim Kutuları */
   .form-select {
     width: 100%;
     padding: 8px;
@@ -83,6 +91,7 @@ body {
     font-size: 16px;
   }
   
+  /* Malzeme Seçenekleri */
   .form-toppings {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -98,6 +107,7 @@ body {
     font-size: 16px;
   }
   
+  /* Sipariş Notu */
   .form-textarea {
     width: 100%;
     padding: 10px;
@@ -107,7 +117,8 @@ body {
     min-height: 80px;
     margin-top: 10px;
   }
-
+  
+  /* Miktar Seçimi */
   .form-quantity {
     display: flex;
     justify-content: center;
@@ -117,7 +128,7 @@ body {
   
   .quantity-button {
     padding: 5px 15px;
-    background-color: #FDC913;
+    background-color: #FDC913; /* Sarı renk */
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;

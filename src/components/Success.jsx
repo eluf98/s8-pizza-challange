@@ -15,9 +15,8 @@ export default function Success() {
     };
 
     return (
-        <div className="OrderPizza">
+        <div className="Success">
         <div className="form-container">
-            
                 <p className="form-subtitle">TEBRİKLER!</p>
                 <p className="form-subtitle">SİPARİŞİNİZ ALINDI!</p>
                 </div>
