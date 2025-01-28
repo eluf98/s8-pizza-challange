@@ -1,18 +1,17 @@
 import React from "react";
-import { useHistory } from "react-router-dom";  // useHistory hook
+import { useHistory } from "react-router-dom"; 
 
-import "./font.css";    
-
+import "./Success.css";  
+import "./Header.css";  
 export default function OrderResult() {
-    const history = useHistory();  // useHistory hook
+    const history = useHistory(); 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Form gönderme işlemi yapılabilir
         console.log("Form submitted");
 
-        // Butona tıkladığında 'PizzaOrderForm' sayfasına yönlendir
-        history.push("/OrderPizza");  // History.push ile yönlendir
+        
+        history.push("/OrderPizza"); 
     };
 
     return (

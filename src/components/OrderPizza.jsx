@@ -1,185 +1,247 @@
-import React, { useState } from 'react';
-import './OrderPizza.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./OrderPizza.css";
+import "./Header.css";
+import { useHistory } from "react-router-dom";  
 
-export default function Order() {
+const PizzaOrderForm = () => {
+  const [name, setName] = useState(""); 
+  const [size, setSize] = useState("");
+  const [crust, setCrust] = useState("");
+  const [toppings, setToppings] = useState([]);
+  const [note, setNote] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
-    const valueToText = (item) => {
-        return item.charAt(0).toUpperCase() + item.slice(1);
+  const history = useHistory();
+
+
+  const toppingOptions = [
+    "Pepperoni",
+    "Tavuk Izgara",
+    "Mısır",
+    "Sarımsak",
+    "Ananas",
+    "Sosis",
+    "Soğan",
+    "Sucuk",
+    "Biber",
+    "Kabak",
+    "Kanada Jambonu",
+    "Domates",
+    "Jalapeno",
+    "Sucuk",
+  ];
+
+const handleToppingChange = (topping) => {
+    if (toppings.includes(topping)) {
+      const updatedToppings = toppings.filter((t) => t !== topping);
+      if (updatedToppings.length >= 4) {
+        setToppings(updatedToppings); 
+      } else {
+        alert("En az 4 malzeme seçmelisiniz.");
+      }
+    } else {
+      if (toppings.length < 10) {
+        setToppings([...toppings, topping]); 
+        alert("En fazla 10 malzeme seçebilirsiniz.");
+      }
+    }
+  };
+  const calculateTotal = () => {
+    const basePrice = 85.5;
+    const toppingPrice = 5;
+    const toppingsCost = toppings.length * toppingPrice;
+    return (basePrice + toppingsCost) * quantity;
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+
+    if (!name || !size || !crust || toppings.length === 0) {
+      alert("Lütfen tüm gerekli alanları doldurun.");
+      return;
     }
 
-    const sizeOptions = ['küçük', 'orta', 'büyük'];
-    const [selectedSize, setSelectedSize] = useState('küçük');
+    setIsSubmitting(true);
 
-    const handleSizeChange = (event) => {
-        setSelectedSize(event.target.value);
-    }
-
-    const doughOptions = ['ince', 'klasik', 'kalın'];
-    const [selectedDough, setSelectedDough] = useState('');
-
-    const handleDoughChange = (event) => {
-        setSelectedDough(event.target.value);
-    }
-
-    const extraIngredients = [
-            { id: 1, label: 'Pepperoni' },
-            { id: 2, label: 'Sosis' },
-            { id: 3, label: 'Kanada Jambonu' },
-            { id: 4, label: 'Tavuk Izgara' },
-            { id: 5, label: 'Soğan' },
-            { id: 6, label: 'Domates' },
-            { id: 7, label: 'Mısır' },
-            { id: 8, label: 'Sucuk' },
-            { id: 9, label: 'Jalepeno' },
-            { id: 10, label: 'Sarımsak' },
-            { id: 11, label: 'Biber' },
-            { id: 12, label: 'Salam' },
-            { id: 13, label: 'Ananas' },
-            { id: 14, label: 'Kabak' }
-    ]
-
-    const [checkedItems, setCheckedItems] = useState([]);
-
-    const handleCheckboxChange = (id) => {
-        if (checkedItems.length >= 10 && !checkedItems.includes(id)) {
-            return;
-        }
-        setCheckedItems((prevCheckedItems) => {
-            if (prevCheckedItems.includes(id)) {
-                return prevCheckedItems.filter(item => item !== id);
-            } else {
-                return [...prevCheckedItems, id];
-            }
-        });
+    const orderData = {
+      isim: name,
+      boyut: size,
+      hamur: crust,
+      malzemeler: toppings,
+      not: note,
+      adet: quantity,
     };
 
-    const [counter, setCounter] = useState(1);
+    try {
+        const response = await axios.post("https://reqres.in/api/pizza", orderData, { 
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+    
+          const result = response.data;
+          console.log("Sipariş Özeti:", result);
+          alert("Sipariş başarıyla gönderildi!");
 
-    const increaseCounter = () => setCounter(counter + 1);
-    const decreaseCounter = () => {
-        if (counter > 1) {
-            setCounter(counter - 1);
+
+          history.push("/OrderResult");
+
+
+
+        } catch (error) {
+          console.error("Sipariş gönderiminde hata:", error);
+          alert("Sipariş gönderilirken bir hata oluştu.");
+        } finally {
+          setIsSubmitting(false); 
         }
-    };
+      };
 
-    const basePrice = 85.50;
-    const extraIngredientPrice = 5;
+  return (
+    <div className="form-container"> 
+    
 
-    const extraCost = checkedItems.length * extraIngredientPrice;
-    const totalPrice = (basePrice + extraCost) * counter;
+      <form onSubmit={handleSubmit}>
+        <h2 className="form-subtitle">Position Absolute Acı Pizza</h2>
+        <p className="form-price">85.50₺</p>
+        <p className="description">
+          Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre.Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir..Küçük bir pizzaya bazen pizzetta denir.
+        </p>
 
-    return (
-        <>
-            <header>
-                <img src="images/iteration-1-images/logo.svg" alt="logo" />
-                <div id='header-container'>
-                    <span id='main-page'>Anasayfa</span>
-                    <span id='sub-page'>- Sipariş Oluştur</span>
-                </div>
-            </header>
-            <div id='wrapper'>
-                <main>
-                    <h2 id='title'>Position Absolute Acı Pizza</h2>
-                    <div className='upper'>
-                        <h2 id='price'>{basePrice.toFixed(2)}₺</h2>
-                        <span id='score'>4.9</span>
-                        <span id='comment-count'>(200)</span>
-                    </div>
-                    <p id='description'>
-                        Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates,
-                        peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir
-                        fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan
-                        İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.
-                    </p>
-                </main>
-                <section id='selection'>
-                    <div id='size'>
-                        <h3>Boyut Seç</h3>
-                        {sizeOptions.map((size) => (
-                            <div key={size}>
-                                <label htmlFor={size}>
-                                    <input
-                                        id={size}
-                                        type='radio'
-                                        value={size}
-                                        checked={selectedSize === size}
-                                        onChange={handleSizeChange}
-                                    />
-                                    {valueToText(size)}
-                                </label>
-                            </div>
-                        ))}
-                    </div>
-                    <div id='dough'>
-                        <h3>Hamur Seç</h3>
-                        <label htmlFor='thickness'>
-                            <select id='thickness' value={selectedDough} onChange={handleDoughChange}>
-                                <option id='placeholder' value="" disabled hidden >
-                                    Hamur Kalınlığı
-                                </option>
-                                {doughOptions.map((dough, index) => (
-                                    <option key={index} value={dough}>{valueToText(dough)}</option>
-                                ))}
-                            </select>
-                        </label>
-                    </div>
-                </section>
-                <section id='extra'>
-                    <h3>Ek Malzemeler</h3>
-                    <p>En fazla 10 malzeme seçebilirsiniz. 5₺</p>
-                    <div className='checkbox-container'>
-                        {extraIngredients.map(ingredient => (
-                            <label className='container' key={ingredient.id}>
-                                <input 
-                                    type="checkbox"
-                                    checked={checkedItems.includes(ingredient.id)}
-                                    onChange={() => handleCheckboxChange(ingredient.id)} 
-                                />
-                                {ingredient.label}
-                                <span className='checkmark'></span>
-                            </label>
-                    ))}
-                    </div>
-                </section>
-                <section id='note'>
-                    <h3>Sipariş Notu</h3>
-                    <input 
-                        type="text"
-                        placeholder='Siparişinize eklemek istediğiniz bir not var mı?' />
-                </section>
-                <hr />
-                <footer>
-                    <div id='counter'>
-                        <button
-                            className='btn'
-                            onClick={decreaseCounter}>
-                               -
-                        </button>
-                        <div id='counter-value'>{counter}</div>
-                        <button
-                            className='btn'
-                            onClick={increaseCounter}>
-                                +
-                        </button>
-                    </div>
-                    <div id='footer-couple'>
-                        <div id='buyout'>
-                            <h3 id='left-title'>Sipariş Toplamı</h3>
-                            <div id='left-col'>
-                                <span style={{ visibility: checkedItems.length > 0 ? "visible" : "hidden" }}>Seçimler</span>
-                                <span style={{ visibility: checkedItems.length > 0 ? "visible" : "hidden" }}>{extraCost.toFixed(2)}₺</span>
-                            </div>
-                            <div id='right-col'>
-                                <span>Toplam</span>
-                                <span>{totalPrice.toFixed(2)}₺</span>
-                            </div>
-                        </div>
-                        <button id='complete-btn'>
-                            <h3>SİPARİŞ VER</h3>
-                        </button>
-                    </div>    
-                </footer>
-            </div>
-        </>
-    )
-}
+
+
+        <div className="form-group">
+          <label className="form-label">İsim *</label>
+          <input
+            type="text"
+            className="form-input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Adınızı giriniz"
+            required
+            minLength="3"  
+            data-cy="ad-input"
+          />
+        </div>
+
+
+
+        <div className="form-group">
+          <label className="form-label">Boyut Seç *</label>
+          <div className="form-options">
+          {["Küçük", "Orta", "Büyük"].map((option) => (
+  <label key={option} className="form-option">
+    <input
+      type="radio"
+      name="size"
+      value={option}
+      checked={size === option}
+      onChange={() => setSize(option)}
+      required
+      data-cy="size-input"
+    />
+    <span>{option}</span>
+  </label>
+))}
+          </div>
+        </div>
+
+
+
+        <div className="form-group">
+          <label className="form-label">Hamur Seç *</label>
+          <select
+            className="form-select"
+            value={crust}
+            onChange={(e) => setCrust(e.target.value)}
+            required
+          >
+            <option value="">Hamur Kalınlığı</option>
+            <option value="İnce">İnce</option>
+            <option value="Normal">Normal</option>
+            <option value="Kalın">Kalın</option>
+            data-cy="hamur-input"
+          </select>
+        </div>
+
+
+
+        <div className="form-group">
+          <label className="form-label">
+            Ek Malzemeler (5₺/malzeme, min4, max 10)
+          </label>
+          <div className="form-toppings">
+            {toppingOptions.map((topping) => (
+              <label key={topping} className="form-option">
+                <input
+                  type="checkbox"
+                  checked={toppings.includes(topping)}
+                  onChange={() => handleToppingChange(topping)}
+                  data-cy="ekler-input"
+                />
+                <span>{topping}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+
+
+        <div className="form-group">
+          <label className="form-label">Sipariş Notu</label>
+          <textarea
+            className="form-textarea"
+            placeholder="Siparişe eklemek istediğiniz bir not var mı?"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+          />
+        </div>
+
+
+
+
+        <div className="form-group form-quantity">
+          <button
+            type="button"
+            className="quantity-button"
+            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+          >
+            -
+          </button>
+          <span className="quantity-value">{quantity}</span>
+
+          <button
+            type="button"
+            className="quantity-button"
+            onClick={() => setQuantity((q) => q + 1)}
+          >
+            +
+          </button>
+        </div>
+
+
+
+        <div className="form-group">
+          <p className="form-total">
+            Sipariş Toplamı: <span>{calculateTotal().toFixed(2)}₺</span>
+          </p>
+        </div>
+
+
+
+        <button
+          type="submit"
+          className="form-submit"
+          disabled={isSubmitting}
+        >
+          Sipariş Ver
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default PizzaOrderForm;

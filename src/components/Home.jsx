@@ -1,17 +1,29 @@
-import React, { useState } from 'react';
-import './Home.css';
-import './font.css';
+import React from "react";
+import { useHistory } from "react-router-dom"; 
 
-export default function Home() {
+import "./Home.css";  
+import "./Header.css";  
+
+export default function MainPage() {
+    const history = useHistory();  
+
+    const handleClick = () => {
+       
+        
+        history.push("/OrderPizza"); 
+    };
+
+   
 
     return (
-        <div id='home-root'>
-            <div id='home-wrapper'>
-                <img id='logo' src="images/iteration-1-images/logo.svg" alt="logo" />
-                <span className='plain-text satisfy-regular'>KOD ACIKTIRIR</span>
-                <span className='plain-text satisfy-regular'>PİZZA, DOYURUR</span>
-                <button className='home-btn'>ACIKTIM</button>
-            </div>
+        <div className="MainPage">
+        <div className="form-container">
+                <p className="form-subtitle">KOD ACIKTIRIR</p>
+                <p className="form-subtitle">PİZZA, DOYURUR</p>
+                <button onClick={handleClick}  className="form-submit">
+                    ACIKTIM
+                </button>
+                </div>
         </div>
-    )
-} 
+    );
+}
