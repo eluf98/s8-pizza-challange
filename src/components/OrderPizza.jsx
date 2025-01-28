@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./OrderPizza.css";
+import "./Success.css";
 import "./Header.css";
 import { useHistory } from "react-router-dom";  
 
-const PizzaOrderForm = () => {
+const OrderPizza = () => {
   const [name, setName] = useState(""); 
   const [size, setSize] = useState("");
   const [crust, setCrust] = useState("");
@@ -88,7 +89,7 @@ const handleToppingChange = (topping) => {
           alert("Sipariş başarıyla gönderildi!");
 
 
-          history.push("/OrderResult");
+          history.push("/Success");
 
 
 
@@ -244,4 +245,4 @@ const handleToppingChange = (topping) => {
   );
 };
 
-export default PizzaOrderForm;
+export default OrderPizza;

@@ -16,7 +16,7 @@ export default function MainPage() {
    
 
     return (
-        <div className="MainPage">
+        <div className="Home">
         <div className="form-container">
                 <p className="form-subtitle">KOD ACIKTIRIR</p>
                 <p className="form-subtitle">PİZZA, DOYURUR</p>

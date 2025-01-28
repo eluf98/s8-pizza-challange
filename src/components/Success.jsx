@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import "./Success.css";  
 import "./Header.css";  
-export default function OrderResult() {
+export default function Success() {
     const history = useHistory(); 
 
     const handleSubmit = (event) => {

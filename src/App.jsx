@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";  // Router, Route ve Switch'i import ediyoruz
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"; 
 
 
 import OrderPizza from "./components/OrderPizza";
