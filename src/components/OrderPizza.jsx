@@ -13,6 +13,7 @@ const OrderPizza = () => {
   const [note, setNote] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [nameWarn, setNameWarn] = useState("");
 
   const history = useHistory();
 
@@ -52,12 +53,25 @@ const OrderPizza = () => {
     return (basePrice + toppingsCost) * quantity;
   };
 
+  const handleNameChange = (e) => {
+    const inputName = e.target.value;
+    setName(inputName);
 
+    // İsim uzunluğu kontrolü
+    if (inputName.length < 3) {
+      setNameWarn("Lütfen adınızı minimum 4 karakter olacak şekilde giriniz.");
+    } else {
+      setNameWarn("");
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
 
-   console.log("Pizza boyutu:", size);
+    if (!name || !size || !crust || toppings.length === 0) {
+        alert("Lütfen tüm gerekli alanları doldurun.");
+        return;
+      }
 
     setIsSubmitting(true);
 
@@ -96,7 +110,6 @@ const OrderPizza = () => {
 
   return (
     <div className="form-container"> 
-    
     <div className="form-header-image"></div>
       <form onSubmit={handleSubmit}>
         <h2 className="subtitle">Position Absolute Acı Pizza</h2>
@@ -177,7 +190,20 @@ const OrderPizza = () => {
           />
         </div>
 
-
+        <div className="form-group">
+          <label className="form-label">İsim *</label>
+          <input
+            type="text"
+            className="form-input"
+            value={name}
+            onChange={handleNameChange} // handleNameChange kullanıldı
+            placeholder="Adınızı giriniz"
+            required
+            minLength="3" // Min 3 karakter
+            data-cy="ad-input"
+          />
+          {nameWarn && <p style={{ color: "red" }}>{nameWarn}</p>} {/* Uyarı mesajı */}
+        </div>
 
 
         <div className="form-group form-quantity">

@@ -14,6 +14,8 @@ body {
   .form-container {
     max-width: 600px;
     margin: 50px auto;
+    margin-top: 0;  /* Form container'ın üst kısmındaki boşluğu sıfırlıyoruz */
+    padding-top: 0;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
