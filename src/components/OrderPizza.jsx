@@ -34,17 +34,13 @@ const OrderPizza = () => {
     "Sucuk",
   ];
 
-const handleToppingChange = (topping) => {
+  const handleToppingChange = (topping) => {
     if (toppings.includes(topping)) {
-      const updatedToppings = toppings.filter((t) => t !== topping);
-      if (updatedToppings.length >= 4) {
-        setToppings(updatedToppings); 
-      } else {
-        alert("En az 4 malzeme seçmelisiniz.");
-      }
+      setToppings(toppings.filter((t) => t !== topping));
     } else {
       if (toppings.length < 10) {
-        setToppings([...toppings, topping]); 
+        setToppings([...toppings, topping]);
+      } else {
         alert("En fazla 10 malzeme seçebilirsiniz.");
       }
     }
@@ -61,10 +57,7 @@ const handleToppingChange = (topping) => {
     e.preventDefault();
 
 
-    if (!name || !size || !crust || toppings.length === 0) {
-      alert("Lütfen tüm gerekli alanları doldurun.");
-      return;
-    }
+   console.log("Pizza boyutu:", size);
 
     setIsSubmitting(true);
 
@@ -106,29 +99,11 @@ const handleToppingChange = (topping) => {
     
 
       <form onSubmit={handleSubmit}>
-        <h2 className="form-subtitle">Position Absolute Acı Pizza</h2>
+        <h2 className="subtitle">Position Absolute Acı Pizza</h2>
         <p className="form-price">85.50₺</p>
         <p className="description">
           Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre.Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir..Küçük bir pizzaya bazen pizzetta denir.
         </p>
-
-
-
-        <div className="form-group">
-          <label className="form-label">İsim *</label>
-          <input
-            type="text"
-            className="form-input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Adınızı giriniz"
-            required
-            minLength="3"  
-            data-cy="ad-input"
-          />
-        </div>
-
-
 
         <div className="form-group">
           <label className="form-label">Boyut Seç *</label>
@@ -171,23 +146,24 @@ const handleToppingChange = (topping) => {
 
 
         <div className="form-group">
-          <label className="form-label">
-            Ek Malzemeler (5₺/malzeme, min4, max 10)
-          </label>
-          <div className="form-toppings">
-            {toppingOptions.map((topping) => (
-              <label key={topping} className="form-option">
-                <input
-                  type="checkbox"
-                  checked={toppings.includes(topping)}
-                  onChange={() => handleToppingChange(topping)}
-                  data-cy="ekler-input"
-                />
-                <span>{topping}</span>
-              </label>
-            ))}
-          </div>
-        </div>
+    <label className="form-label">
+      Ek Malzemeler (En fazla 10 malzeme seçebilirsiniz. 5₺)
+    </label>
+    <div className="form-toppings">
+      {toppingOptions.map((topping) => (
+        <label key={topping} className="form-option">
+          <input
+            type="checkbox"
+            checked={toppings.includes(topping)}
+            onChange={() => handleToppingChange(topping)}
+            disabled={toppings.length >= 10 && !toppings.includes(topping)}
+            data-cy="ekler-input"
+          />
+          <span>{topping}</span>
+        </label>
+      ))}
+    </div>
+  </div>
 
 
 

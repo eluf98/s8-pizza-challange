@@ -1,8 +1,8 @@
 
 body {
     font-family: 'Roboto Condensed', sans-serif; /* Fontu Roboto Condensed */
-    background-color: #FAF7F2; /* Bej arka plan */
-    color: #292929; /* Koyu gri yazı rengi */
+    background-color: #FAF7F2; 
+    color: #292929; 
     margin: 0;
     padding: 0;
   }
@@ -11,7 +11,6 @@ body {
     font-family: 'Barlow', sans-serif; /* Başlıklar ve etiketler için Barlow fontu */
   }
   
-  /* Form Konteyneri */
   .form-container {
     max-width: 600px;
     margin: 50px auto;
@@ -21,43 +20,52 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+  .description {
+    max-width: 600px; 
+    margin: 0 auto; 
+    text-align: justify;
+    line-height: 1.6;
+    font-size: 16px; 
+  }
   
-  /* Başlık */
   .form-title {
     font-size: 28px;
     font-weight: bold;
-    color: #CE2829; /* Kırmızı renk */
+    color: #CE2829; 
     margin-bottom: 20px;
-    text-align: center;
+    text-align: left;
   }
   
-  /* Alt Başlık */
-  .form-subtitle {
+ 
+  .subtitle {
     font-size: 22px;
-    color: black; /* Açık gri */
+    color: black; 
     margin-bottom: 10px;
+    padding:0;
+    text-align: left;
   }
   
-  /* Fiyat */
+  
   .form-price {
     font-size: 18px;
     color: black;
     margin-bottom: 20px;
+    text-align: left;
   }
   
-  /* Form Grupları */
+  
   .form-group {
     margin-bottom: 20px;
   }
   
-  /* Etiketler */
+  
   .form-label {
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
   }
   
-  /* İsim Giriş */
+  
   .form-input {
     width: 100%;
     padding: 10px;
@@ -66,7 +74,7 @@ body {
     font-size: 16px;
   }
   
-  /* Radyo Seçenekleri */
+ 
   .form-options {
     display: flex;
     gap: 15px;
@@ -82,7 +90,7 @@ body {
     margin-right: 5px;
   }
   
-  /* Seçim Kutuları */
+
   .form-select {
     width: 100%;
     padding: 8px;
@@ -91,7 +99,7 @@ body {
     font-size: 16px;
   }
   
-  /* Malzeme Seçenekleri */
+  
   .form-toppings {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -107,7 +115,7 @@ body {
     font-size: 16px;
   }
   
-  /* Sipariş Notu */
+  
   .form-textarea {
     width: 100%;
     padding: 10px;
@@ -118,7 +126,6 @@ body {
     margin-top: 10px;
   }
   
-  /* Miktar Seçimi */
   .form-quantity {
     display: flex;
     justify-content: center;
@@ -128,7 +135,7 @@ body {
   
   .quantity-button {
     padding: 5px 15px;
-    background-color: #FDC913; /* Sarı renk */
+    background-color: #FDC913; 
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
@@ -136,25 +143,25 @@ body {
   }
   
   .quantity-button:hover {
-    background-color: #CE2829; /* Kırmızı renk */
+    background-color: #CE2829; 
     color: white;
   }
   
-  /* Toplam Fiyat */
+  
   .form-total {
     font-weight: bold;
     font-size: 18px;
-    color: #CE2829; /* Kırmızı */
+    color: #CE2829; 
     margin-top: 15px;
     text-align: center;
   }
   
-  /* Sipariş Ver Butonu */
+
   .form-submit {
     display: block;
     width: 100%;
     padding: 12px;
-    background-color: #FDC913; /* Sarı renk */
+    background-color: #FDC913; 
     color: #fff;
     font-weight: bold;
     border: none;
@@ -165,7 +172,7 @@ body {
   }
   
   .form-submit:hover {
-    background-color: #CE2829; /* Kırmızı renk */
+    background-color: #CE2829; 
   }
   
   .form-submit:disabled {
@@ -173,16 +180,15 @@ body {
     cursor: not-allowed;
   }
   
-  /* Uyarı Mesajları */
   .error-message {
-    color: #CE2829; /* Kırmızı */
+    color: #CE2829; 
     font-weight: bold;
     margin-top: 10px;
     text-align: center;
   }
   
   .success-message {
-    color: #28a745; /* Yeşil */
+    color: #28a745; 
     font-weight: bold;
     margin-top: 10px;
     text-align: center;
