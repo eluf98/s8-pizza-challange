@@ -57,7 +57,6 @@ const OrderPizza = () => {
     const inputName = e.target.value;
     setName(inputName);
 
-    // İsim uzunluğu kontrolü
     if (inputName.length < 3) {
       setNameWarn("Lütfen adınızı minimum 4 karakter olacak şekilde giriniz.");
     } else {
@@ -196,13 +195,13 @@ const OrderPizza = () => {
             type="text"
             className="form-input"
             value={name}
-            onChange={handleNameChange} // handleNameChange kullanıldı
+            onChange={handleNameChange} 
             placeholder="Adınızı giriniz"
             required
-            minLength="3" // Min 3 karakter
+            minLength="3" 
             data-cy="ad-input"
           />
-          {nameWarn && <p style={{ color: "red" }}>{nameWarn}</p>} {/* Uyarı mesajı */}
+          {nameWarn && <p style={{ color: "red" }}>{nameWarn}</p>} 
         </div>
 
 
