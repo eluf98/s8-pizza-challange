@@ -97,7 +97,7 @@ const OrderPizza = () => {
   return (
     <div className="form-container"> 
     
-
+    <div className="form-header-image"></div>
       <form onSubmit={handleSubmit}>
         <h2 className="subtitle">Position Absolute Acı Pizza</h2>
         <p className="form-price">85.50₺</p>
