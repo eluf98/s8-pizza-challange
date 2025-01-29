@@ -58,7 +58,7 @@ const OrderPizza = () => {
     setName(inputName);
 
     if (inputName.length < 3) {
-      setNameWarn("Lütfen adınızı minimum 4 karakter olacak şekilde giriniz.");
+      setNameWarn("Lütfen adınızı minimum 3 karakter olacak şekilde giriniz.");
     } else {
       setNameWarn("");
     }
