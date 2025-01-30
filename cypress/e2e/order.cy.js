@@ -1,6 +1,6 @@
 describe("order form", () => {
     beforeEach(() => {
-      cy.visit("http://localhost:5173/order");
+      cy.visit("http://localhost:5173/OrderPizza");
     });
   
     it("initializes with disabled button", () => {
@@ -31,7 +31,7 @@ describe("order form", () => {
   
       it("redirects user on successful submit", () => {
         cy.get('[data-testid="submit-button"]').click();
-        cy.url().should("include", "/success");
+        cy.url().should("include", "/Success");
       });
     });
   
